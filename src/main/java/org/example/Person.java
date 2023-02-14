@@ -8,6 +8,13 @@ public class Person {
     private final int age;
     private final String gender;
 
+    /**
+     *
+     * @param name: string value
+     * @param age: integer value
+     * @param gender: male or female
+     * @throws Exception when gender input is invalid
+     */
     public Person(String name, int age, String gender) throws Exception {
         if (!gender.equalsIgnoreCase("MALE") && !gender.equalsIgnoreCase("FEMALE")) {
             throw new Exception("The following gender is invalid: " + gender);
@@ -35,7 +42,7 @@ public class Person {
      * female mean age)
      *
      * @param persons: List of Person
-     * @return average
+     * @return average, -1 if persons does not contain any Person of such gender
      */
     public static double[] averageAgePerGender(List<Person> persons) {
         double[] average = {0, 0};

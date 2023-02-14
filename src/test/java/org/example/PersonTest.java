@@ -6,7 +6,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-    class PersonTest {
+class PersonTest {
 
     Person p1, p2, p3, p4, p5, p6;
     List<Person> persons;
