@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Person.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PersonTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Person.java</span></div><h1>Person.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.List;
+
+public class Person {
+
+    private final String name;
+    private final int age;
+    private final String gender;
+
+<span class="fc" id="L11">    public Person(String name, int age, String gender) throws Exception {</span>
+<span class="fc bfc" id="L12" title="All 4 branches covered.">        if (!gender.equalsIgnoreCase(&quot;MALE&quot;) &amp;&amp; !gender.equalsIgnoreCase(&quot;FEMALE&quot;)) {</span>
+<span class="fc" id="L13">            throw new Exception(&quot;The following gender is invalid: &quot; + gender);</span>
+        }
+<span class="fc" id="L15">        this.name = name;</span>
+<span class="fc" id="L16">        this.age = age;</span>
+<span class="fc" id="L17">        this.gender = gender.toUpperCase();</span>
+<span class="fc" id="L18">    }</span>
+
+    public String name() {
+<span class="fc" id="L21">        return name;</span>
+    }
+
+    public int age() {
+<span class="fc" id="L25">        return age;</span>
+    }
+
+    public String gender() {
+<span class="fc" id="L29">        return gender.toUpperCase();</span>
+    }
+
+    /**
+     * Computes the average age of male and female persons in a list and returns the result in
+     * an array of two elements( the first element is the male mean age and the second one is the
+     * female mean age)
+     *
+     * @param persons: List of Person
+     * @return average
+     */
+    public static double[] averageAgePerGender(List&lt;Person&gt; persons) {
+<span class="fc" id="L41">        double[] average = {0, 0};</span>
+<span class="fc" id="L42">        int maleCount = 0, femaleCount = 0;</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for (Person p : persons) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if (p.gender.equalsIgnoreCase(&quot;MALE&quot;)) {</span>
+<span class="fc" id="L46">                average[0] += p.age;</span>
+<span class="fc" id="L47">                maleCount += 1;</span>
+            } else {
+<span class="fc" id="L49">                average[1] += p.age;</span>
+<span class="fc" id="L50">                femaleCount += 1;</span>
+            }
+<span class="fc" id="L52">        }</span>
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (maleCount &gt; 0) {</span>
+<span class="fc" id="L55">            average[0] /= maleCount;</span>
+        } else {
+<span class="fc" id="L57">            average[0] = -1;</span>
+        }
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (femaleCount &gt; 0) {</span>
+<span class="fc" id="L61">            average[1] /= femaleCount;</span>
+        } else {
+<span class="fc" id="L63">            average[1] = -1;</span>
+        }
+
+
+<span class="fc" id="L67">        return average;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
