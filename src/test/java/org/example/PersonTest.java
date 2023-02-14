@@ -52,4 +52,31 @@ class PersonTest {
         assertEquals("FEMALE", p5.gender());
     }
 
+    @Test
+    void shouldReturnAnExceptionForInvalidGender() {
+        assertThrows(Exception.class, () -> p1 = new Person("John", 21, "Cyborg"));
+    }
+
+    @Test
+    void shouldReturnAverageAgesPerGender() {
+        double maleAvg = (21 + 14 + 5) / 3.0;
+        double femaleAvg = (26 + 11 + 33) / 3.0;
+
+        assertEquals(maleAvg, Person.averageAgePerGender(persons)[0]);
+        assertEquals(femaleAvg, Person.averageAgePerGender(persons)[1]);
+    }
+
+    @Test
+    void shouldReturnMinusOneIfListHasNoneOfMaleGender() {
+        persons = new ArrayList<>(Arrays.asList(p3, p5, p6));
+
+        assertEquals(-1, Person.averageAgePerGender(persons)[0]);
+    }
+
+    @Test
+    void shouldReturnMinusOneIfListHasNoneOfFemaleGender() {
+        persons = new ArrayList<>(Arrays.asList(p1, p2, p4));
+
+        assertEquals(-1, Person.averageAgePerGender(persons)[1]);
+    }
 }
