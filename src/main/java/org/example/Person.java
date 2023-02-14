@@ -34,7 +34,23 @@ public class Person {
      * @param persons
      * @return
      */
-    public double[] averageAgePerGender(List<Person> persons) {
+    public double[] averageAgePerGender(List<Person> persons) throws Exception {
+        double[] average = {0, 0};
+        int maleCount = 0, femaleCount = 0;
 
+        for (Person p : persons) {
+            if (p.gender.toUpperCase() == "MALE") {
+                average[0] += p.age;
+            } else if (p.gender.toUpperCase() == "FEMALE") {
+                average[1] += p.age;
+            } else {
+                throw new Exception("The following gender is invalid: " + p.gender);
+            }
+
+            average[0] /= maleCount;
+            average[1] /= femaleCount;
+
+        }
+        return average;
     }
 }
