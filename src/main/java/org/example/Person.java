@@ -8,10 +8,13 @@ public class Person {
     private final int age;
     private final String gender;
 
-    public Person(String name, int age, String gender) {
+    public Person(String name, int age, String gender) throws Exception {
+        if (!gender.equalsIgnoreCase("MALE") && !gender.equalsIgnoreCase("FEMALE")) {
+            throw new Exception("The following gender is invalid: " + gender);
+        }
         this.name = name;
         this.age = age;
-        this.gender = gender;
+        this.gender = gender.toUpperCase();
     }
 
     public String name() {
@@ -23,7 +26,7 @@ public class Person {
     }
 
     public String gender() {
-        return gender;
+        return gender.toUpperCase();
     }
 
     /**
@@ -31,24 +34,29 @@ public class Person {
      * an array of two elements( the first element is the male mean age and the second one is the
      * female mean age)
      *
-     * @param persons
-     * @return
+     * @param persons: List of Person
+     * @return average
      */
-    public double[] averageAgePerGender(List<Person> persons) throws Exception {
+    public double[] averageAgePerGender(List<Person> persons) {
         double[] average = {0, 0};
         int maleCount = 0, femaleCount = 0;
 
         for (Person p : persons) {
-            if (p.gender.toUpperCase() == "MALE") {
+            if (p.gender.equalsIgnoreCase("MALE")) {
                 average[0] += p.age;
-            } else if (p.gender.toUpperCase() == "FEMALE") {
-                average[1] += p.age;
+                maleCount += 1;
             } else {
-                throw new Exception("The following gender is invalid: " + p.gender);
+                average[1] += p.age;
+                femaleCount += 1;
             }
 
-            average[0] /= maleCount;
-            average[1] /= femaleCount;
+            if (maleCount > 0) {
+                average[0] /= maleCount;
+            }
+
+            if (femaleCount > 0) {
+                average[1] /= femaleCount;
+            }
 
         }
         return average;
